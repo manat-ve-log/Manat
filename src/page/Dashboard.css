@@ -1,0 +1,245 @@
+.HeadDasboard{
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    /* background-color: blue; */
+    width: 95%;
+}
+.HeadTitle{
+    position: absolute;
+    top: -20px;
+    left: 20px;
+    z-index: 100;
+}
+.DashboardHead{
+    margin: 20px ;
+    display: flex;
+    /* position: absolute; */
+    gap:10px;
+    justify-content: space-around;
+    align-items: center;
+    margin-left: 10px;
+    width: 100%;
+    height: 100px;
+    animation: hidder 3s linear;
+    position: relative;
+    /* background: red; */
+}
+
+.card{
+    width: 220px;
+    height: 80px;
+    background: rgb(255, 255, 255);
+    border-radius:5px;
+    position: relative;
+    box-shadow: 5px 5px 20px rgb(0,0,0,.1), -5px -5px 20px rgb(255,255,255,.1);
+    overflow: hidden;
+
+}
+.cardTitle{
+    position: absolute;
+    left:40px;
+    top: 60%;
+    transform: translate(-50% ,-50%);
+    /* background: red; */
+}
+.cardAmount{
+    position: absolute;
+    left:40px;
+    top:40%;
+    transform: translate(-50%,-50%);
+    /* background: red; */
+}
+.cardIcon{
+    position: absolute;
+    top:55%;
+    transform: translate(0 ,-50%);
+    right:10px;
+    font-size: 4em;
+    opacity: 0.9;
+}
+
+.cardBotton{
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    justify-content: center;
+    height: 100%;
+    bottom: 0;
+    /* background: rgb(242,235,241);
+    background: linear-gradient(180deg, rgba(242,235,241,1) 3%, rgba(242,235,241,1) 6%, rgba(102,15,86,1) 100%);   */
+}
+
+.card:hover .cardBotton{
+    opacity: 0.5;
+    height: 100%;
+    animation: view 1s linear ;
+    
+}
+.card:hover .cardBotton div{ 
+    background-color: red;
+    cursor: pointer;
+}
+
+@keyframes view {
+    0%{
+        opacity: 0.1;
+    }
+    100%{
+        opacity: 0.5;
+    }
+}
+.item1 .cardIcon{
+    color:#D20A0A;
+    color:#f5dcdc;
+}
+.item1::before{
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(75deg, #FFD5EA,rgb(160, 172, 249), rgba(102,15,86,1) ); 
+    /* background-color: #FFD5EA; */
+}.item2 .cardIcon{
+    color:#A93E00;
+}
+.item2::before{
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #FFDF72;
+}
+.item3 .cardIcon{
+    color:#A100C2;
+}
+.item3::before{
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    /* background-color: #FFAFED; */
+}
+.item4 .cardIcon{
+    /* color:#BA066C; */
+    color:#ffffff;
+}
+.item4::before{
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(75deg, rgb(73, 95, 186),rgb(87, 232, 227) ); 
+    /* background-color: #FECBDA; */
+}
+.item5{
+    width: 300px;
+    height: 170px;
+}
+
+@keyframes hidder {
+    0%{
+        opacity: 0.2;
+    }
+    50%{
+        opacity: 0.5;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+.DashboardBodycenter{
+
+    width: 100%;
+    height: 100%;
+    /* background-color: aquamarine; */
+}
+.DashboardBodycenterContent{
+    display: flex;
+    justify-content: center;
+    width: 95%;
+    height: 100%;
+    gap: 20px;
+    /* background-color: chocolate; */
+}
+
+.DashboardBody{
+    display: flex;
+    /* justify-content: space-around; */
+    gap: 5px;
+    /* align-items: first; */
+    width: 100%;
+    position: relative;
+    /* height: 500px; */
+    /* background:black; */
+}
+
+
+.DashboardBody{
+    width: 95%;
+    height: 100%;
+    /* background-color: rgba(102,15,86,1); */
+}
+.DashboardBody-Left{
+    width: 70%;
+    height: 100%;
+    /* background-color: rgb(233, 178, 223); */
+}
+.DashboardBody-Right{
+    width: 30%;
+    height: 100%;
+    /* background-color: rgb(233, 178, 223); */
+}
+.DashboardBody-Left-Graph{
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    height: 240px;
+    /* background-color: rgb(13, 14, 40); */
+}
+
+.graph{
+    border-radius: 5px;
+    box-shadow: 5px 5px 20px rgb(0,0,0,.1), -5px -5px 20px rgb(255,255,255,.1);
+}
+.graph1{
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    width: 50%;
+    height: 220px;
+}
+.graph2{
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    width: 45%;
+    height:220px;
+}
+.graph3{
+    display: flex;
+    width: 100%;
+    height:324px;
+    /* background-color: rebeccapurple; */
+}
+.graph6{
+    margin: 10px 0;
+    width: 100%;
+    height:100px;
+    background-color: rgb(37, 18, 56);
+}
+.DashboardBody-Left-ShowData{
+    padding:0 10px;
+}
+.Showdata-Time{
+    padding: 20px;
+    height: auto;
+    border-radius: 5px;
+    /* overflow: auto; */
+    /* background-color: red; */
+    box-shadow: 5px 5px 20px rgb(0,0,0,.1), -5px -5px 20px rgb(255,255,255,.1);
+}

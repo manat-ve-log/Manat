@@ -1,0 +1,41 @@
+.MeetingLayoutHead{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 10%;
+    background-color: red;
+}
+.MeetingLayout-Head{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin: 0 20px;
+    color:white;
+}
+.Link-Booking-Edit{
+    display: flex;
+    background-color: black;
+    width: 300px;
+    
+    color: aliceblue;
+}
+.Link-Booking-Edit .Link{
+    display: flex;
+    height: 100%;
+    align-items: center;
+    font-size: 2em;
+    margin: 0 20px;
+    text-decoration: none;
+    text-align: center;
+    background-color: chartreuse;
+}
+.Link-Booking-Edit .Link .iconBooking{
+    font: 100em ;
+}
+
+.MeetingLayoutData{
+    width: 100%;
+    height: 90%;
+    background-color: blue;
+}
