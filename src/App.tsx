@@ -17,6 +17,7 @@ import Sidebar from './component/Sidebar/Sidebar';
 const styleBody:React.CSSProperties={
   minWidth: "320px",
   minHeight: "100vh",
+  fontFamily:"Times New Roman, Times, serif",
 };
 
 const App: React.FC = () => {

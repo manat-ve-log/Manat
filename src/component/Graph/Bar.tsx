@@ -23,63 +23,28 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
       label: 'My First Dataset',
       data: [65, 59, 80, 81, 56, 55, 40, 70, 66, 75, 90, 85], // Data for 12 months
       backgroundColor: [
-        'rgba(255, 99, 132, 0.2)',
-        'rgba(255, 159, 64, 0.2)',
-        'rgba(255, 205, 86, 0.2)',
-        'rgba(75, 192, 192, 0.2)',
-        'rgba(54, 162, 235, 0.2)',
-        'rgba(153, 102, 255, 0.2)',
-        'rgba(201, 203, 207, 0.2)',
-        'rgba(255, 99, 132, 0.2)',
-        'rgba(255, 159, 64, 0.2)',
-        'rgba(255, 205, 86, 0.2)',
-        'rgba(75, 192, 192, 0.2)',
-        'rgba(54, 162, 235, 0.2)',
+        '#007bff',
+        '#007bff',
+        '#007bff',
+        '#007bff',
+        '#007bff',
+        '#007bff',
+        '#007bff',
+        '#007bff',
+        '#007bff',
+        '#007bff',
+        '#007bff',
+        '#007bff',
       ],
-      borderColor: [
-        'rgb(255, 99, 132)',
-        'rgb(255, 159, 64)',
-        'rgb(255, 205, 86)',
-        'rgb(75, 192, 192)',
-        'rgb(54, 162, 235)',
-        'rgb(153, 102, 255)',
-        'rgb(201, 203, 207)',
-        'rgb(255, 99, 132)',
-        'rgb(255, 159, 64)',
-        'rgb(255, 205, 86)',
-        'rgb(75, 192, 192)',
-        'rgb(54, 162, 235)',
-      ],
-      borderWidth: 1
+      // ปรับให้เส้นขอบหนาขึ้นเพื่อให้ดูเด่นชัด
     }]
   }
+  
   const options = {
     plugins: {
-      // title: {
-      //   display: true,
-      //   text: 'Amout',
-      // },
-      // legend: {
-      //   display: true, // Adjust as needed
-      // },
+      
     },
-    // layout: {
-    //   padding: {
-    //     top: 5, // Padding on top
-    //     right: 5, // Padding on right
-    //     bottom: 5, // Padding on bottom
-    //     left: 5, // Padding on left
-    //   },
-    // },
-    // scales: {
-    //   x: {
-    //     stacked: true,
-    //     title: {
-    //       display: true,
-    //       text: 'Months',
-    //     },
-    //   },
-    // },
+    
   };
   return (
     <div style={{width:'100%'}}>

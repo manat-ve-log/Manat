@@ -1,27 +1,77 @@
 import React, { useState } from "react";
-import { Button, Form, Input, Modal } from 'antd';
+import { Button, Form, Input, Modal, message as antdMessage,InputNumber } from 'antd';
 import { MeetingInterface } from "../../../interface/IMeetingRoom"; // Adjust the path as necessary
+import { DeleteMeetingRoomByID, UpdateMeetingRoom } from "../../../service/https";
+import { useNavigate } from 'react-router-dom';
 
 interface EditPopupProps {
-    room: MeetingInterface; // Room data to edit
-    closePopup: () => void; // Function to close the popup
+    room?: MeetingInterface; // Room data to edit
+    closePopup?: () => void; // Function to close the popup
     onDelete?: (roomId: number) => void; // Function to handle room deletion
+    onSubmit?: (updatedRoom: MeetingInterface) => void; // Callback to submit the form data
 }
 
-const onFinish = (values: any) => {
-    console.log('Received values of form: ', values);
-};
+const EditPopup: React.FC<EditPopupProps> = ({ room, closePopup, onDelete}) => {
+    const navigate = useNavigate();
+    const [rooms, setRooms] = useState<MeetingInterface[]>(room?[room]:[]);
+    const [deleteID, setDeleteID] = useState<number | undefined>(room?.ID);
+    const [confirmLoading, setConfirmLoading] = useState(false);
 
-const EditPopup: React.FC<EditPopupProps> = ({ room, closePopup, onDelete }) => {
-
+    const onFinish = async (values: MeetingInterface) => {
+        values.ID = room?.ID;
+        const capacity = parseInt(values.Capacity, 10);
+        const roomSize = parseFloat(values.RoomSize);
+        const airCondition = parseInt(values.AirCondition, 10);
+        const chair = parseInt(values.Chair, 10);
+        values.Capacity = capacity;
+        values.RoomSize = roomSize;
+        values.AirCondition = airCondition;
+        values.Chair = chair;
+        if (room) {
+            try {
+                console.log(values);
+                const res = await UpdateMeetingRoom(values);
+                if (res) {
+                    antdMessage.success(res.message || "Room updated successfully.");
+                    setTimeout(() => {
+                        navigate("/meetingRoom");
+                    }, 2000);
+                    if (closePopup) closePopup();
+                } else {
+                    antdMessage.error(res.message || "Failed to update room.");
+                }
+            } catch (error) {
+                antdMessage.error("An unexpected error occurred.");
+                console.error("UpdateMeetingRoom error:", error);
+            }
+        }
+    };
     const handleDelete = () => {
-        Modal.confirm({
-            title: 'Are you sure you want to delete this room?',
-            content: 'This action cannot be undone.',
-            okText: 'Yes, Delete',
-            cancelText: 'No, Cancel',
-            onOk: () => onDelete(room.ID),
-        });
+        if (room?.ID) {
+            Modal.confirm({
+                title: 'Are you sure you want to delete this room?',
+                content: 'This action cannot be undone.',
+                okText: 'Yes, Delete',
+                cancelText: 'No, Cancel',
+                onOk: async () => {
+                    setConfirmLoading(true);
+                    try {
+                        const res = await DeleteMeetingRoomByID(deleteID);
+                        if (res) {
+                            antdMessage.success("Room deleted successfully.");
+                            if (closePopup) closePopup(); 
+                        } else {
+                            antdMessage.error("Failed to delete room.");
+                        }
+                    } catch (error) {
+                        antdMessage.error("An unexpected error occurred.");
+                        console.error("DeleteMeetingRoomByID error:", error);
+                    } finally {
+                        setConfirmLoading(false);
+                    }
+                }
+            });
+        }
     };
 
     return (
@@ -30,12 +80,12 @@ const EditPopup: React.FC<EditPopupProps> = ({ room, closePopup, onDelete }) => 
                 name="edit-form"
                 onFinish={onFinish}
                 initialValues={{
-                    RoomName: room.RoomName,
-                    Capacity: room.Capacity,
-                    AirCondition: room.AirCondition,
-                    Chair: room.Chair,
-                    Type: room.Type,
-                    Detail: room.Detail,
+                    RoomName: room?.RoomName,
+                    Capacity: room?.Capacity,
+                    AirCondition: room?.AirCondition,
+                    Chair: room?.Chair,
+                    Type: room?.Type,
+                    Detail: room?.Detail,
                 }}
                 labelCol={{ span: 8 }}
                 wrapperCol={{ span: 16 }}
@@ -47,6 +97,14 @@ const EditPopup: React.FC<EditPopupProps> = ({ room, closePopup, onDelete }) => 
                     rules={[{ required: true, message: 'Room Name is required' }]}
                 >
                     <Input placeholder="Room Name" />
+                </Form.Item>
+
+                <Form.Item
+                    name='RoomSize'
+                    label="Room Size"
+                    rules={[{ required: true, message: 'Max people is required' }]}
+                >
+                    <Input placeholder="Room Size" type="number" />
                 </Form.Item>
 
                 <Form.Item
@@ -89,15 +147,17 @@ const EditPopup: React.FC<EditPopupProps> = ({ room, closePopup, onDelete }) => 
                 </Form.Item>
 
                 <Form.Item wrapperCol={{ span: 24 }} style={{ textAlign: 'center' }}>
-                    <Button type="primary" onClick={closePopup} htmlType="submit">
+                    <Button type="primary" htmlType="submit">
                         Submit
                     </Button>
                     <Button type="default" onClick={closePopup} style={{ marginLeft: 10 }}>
                         Cancel
                     </Button>
-                    <Button type="danger" onClick={handleDelete} style={{ marginLeft: 10 }}>
-                        Delete
-                    </Button>
+                    {onDelete && (
+                        <Button type="danger" onClick={handleDelete} style={{ marginLeft: 10 }}>
+                            Delete
+                        </Button>
+                    )}
                 </Form.Item>
             </Form>
         </div>

@@ -24,32 +24,11 @@ async function GetMeetingRooms() {
   return res;
 }
 
-// async function GetGenders() {
-//   const requestOptions = {
-//     method: "GET",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//   };
-
-//   let res = await fetch(`${apiUrl}/genders`, requestOptions)
-//     .then((res) => {
-//       if (res.status == 200) {
-//         return res.json();
-//       } else {
-//         return false;
-//       }
-//     });
-
-//   return res;
-// }
-
 async function DeleteMeetingRoomByID(id: Number | undefined) {
   const requestOptions = {
     method: "DELETE"
   };
-
-  let res = await fetch(`${apiUrl}/meetingRooms/${id}`, requestOptions)
+  let res = await fetch(`${apiUrl}/meetingRoom/${id}`, requestOptions)
     .then((res) => {
       if (res.status == 200) {
         return true;
@@ -66,7 +45,7 @@ async function GetMeetingRoomById(id: Number | undefined) {
     method: "GET"
   };
 
-  let res = await fetch(`${apiUrl}/meetingRooms/${id}`, requestOptions)
+  let res = await fetch(`${apiUrl}/meetingRoom/${id}`, requestOptions)
     .then((res) => {
       if (res.status == 200) {
         return res.json();
@@ -86,17 +65,23 @@ async function CreateMeetingRoom(data: MeetingInterface) {
     body: JSON.stringify(data),
   };
 
-  let res = await fetch(`${apiUrl}/meetingRooms`, requestOptions)
-    .then((res) => {
-      if (res.status == 201) {
-        return res.json();
-      } else {
-        return false;
-      }
-    });
-
-  return res;
+  try {
+    const response = await fetch(`${apiUrl}/meetingRoom`, requestOptions);
+    if (response.ok) { // Check if the response is successful (status code in the range 200-299)
+      return await response.json(); // Return the JSON data if successful
+    } else {
+      // Handle other HTTP statuses
+      const errorText = await response.text(); // Get the response text for debugging
+      console.error(`Error: ${response.status} - ${errorText}`);
+      return false;
+    }
+  } catch (error) {
+    // Handle network errors
+    console.error('Network error:', error);
+    return false;
+  }
 }
+
 
 async function UpdateMeetingRoom(data: MeetingInterface) {
   const requestOptions = {
@@ -105,17 +90,21 @@ async function UpdateMeetingRoom(data: MeetingInterface) {
     body: JSON.stringify(data),
   };
 
-  let res = await fetch(`${apiUrl}/meetingRooms`, requestOptions)
-    .then((res) => {
-      if (res.status == 200) {
-        return res.json();
-      } else {
-        return false;
-      }
-    });
+  try {
+    const res = await fetch(`${apiUrl}/meetingRoom`, requestOptions);
 
-  return res;
+    // ตรวจสอบสถานะการตอบสนอง
+    if (res.status === 200) {
+      return await res.json();
+    } else {
+      return false; // ส่งกลับ false เมื่อมีสถานะไม่ใช่ 200
+    }
+  } catch (error) {
+    console.error("Error updating meeting room:", error);
+    return false; // ส่งกลับ false เมื่อเกิดข้อผิดพลาด
+  }
 }
+
 
 export {
   GetMeetingRooms,

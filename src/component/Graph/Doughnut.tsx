@@ -15,16 +15,11 @@ const Graph: React.FC = () => {
     datasets: [
       {
         label: 'My First Dataset',
-        data: [300, 50, 100,23,11,1,132,233],
+        data: [300, 50, 100],
         backgroundColor: [
           'rgb(255, 99, 132)',
           'rgb(54, 162, 235)',
           'rgb(255, 25, 86)',
-          'rgb(255, 232, 86)',
-          'rgb(25, 205, 86)',
-          'rgb(115, 205, 86)',
-          'rgb(255, 205, 255)',
-          'rgb(255, 205, 42)',
         ],
         hoverOffset: 100,
       },
@@ -34,7 +29,7 @@ const Graph: React.FC = () => {
  
 
   return (
-    <div style={{height:'200px'}}>
+    <div style={{height:'100%'}}>
       <Doughnut data={data}/>
     </div>
   );

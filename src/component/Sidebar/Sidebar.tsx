@@ -10,7 +10,8 @@ import { CiLogout } from "react-icons/ci";
 import { MdNavigateBefore } from "react-icons/md";
 import { MdNavigateNext } from "react-icons/md";
 import './Sidebar.css'
-import Dashboard from '../../page/Dashboard';
+// import Dashboard from '../../page/Dashboard';
+import Dashboard from '../../page/Dashboard/Dashboard';
 import Meeting_Room from '../../page/MeetingRoom/Meeting_Room';
 import Edit from '../../page/Edit';
 import Booking from '../../page/Booking/index';
@@ -69,7 +70,7 @@ const Sidebar: React.FC = () => {
             <div className='sidebarIcons'><FaBowlFood/></div>
                 <p>Food</p>
             </Link>
-            <Link className={`sidebarLink sidebarItem4 ${respSidebar ? 'activeMenu' : ''}`} to="/Dashboard">
+            <Link className={`sidebarLink sidebarItem4 ${respSidebar ? 'activeMenu' : ''}`} to="/Meeting_Room/booking">
                 <div className='sidebarIcons'><IoMdPeople/></div>
                 <p>Employee</p>
             </Link>

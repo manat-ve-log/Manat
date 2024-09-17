@@ -50,7 +50,7 @@ const LineChart = () => {
   };
 
   return (
-    <div style={{width:'100%'}}>
+    <div style={{width:'100%',height:'98%',display:'flex',justifyContent:'end'}}>
       <Line data={data} options={options} />
     </div>
   );
